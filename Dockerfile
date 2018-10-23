@@ -53,6 +53,7 @@ COPY tutorials/ tutorials/
 COPY training_config training_config/
 COPY setup.py setup.py
 
+
 # Compile EVALB - required for parsing evaluation.
 # EVALB produces scary looking c-level output which we don't
 # care about, so we redirect the output to /dev/null.
@@ -71,4 +72,4 @@ ENV ALLENNLP_SOURCE_COMMIT $SOURCE_COMMIT
 LABEL maintainer="allennlp-contact@allenai.org"
 
 EXPOSE 8000
-CMD ["/bin/bash"]
+ENTRYPOINT ["python","-m","allennlp.service.server_simple","--archive-path","/data/decomposable-attention-elmo-2018.02.19.tar.gz","--predictor","textual-entailment","--title","Demo of the Textual Entailment Fixture","--field-name","premise","--field-name","hypothesis"]
